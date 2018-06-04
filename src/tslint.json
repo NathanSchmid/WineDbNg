@@ -1,0 +1,17 @@
+{
+    "extends": "../tslint.json",
+    "rules": {
+        "directive-selector": [
+            true,
+            "attribute",
+            "winedb",
+            "camelCase"
+        ],
+        "component-selector": [
+            true,
+            "element",
+            "winedb",
+            "kebab-case"
+        ]
+    }
+}
