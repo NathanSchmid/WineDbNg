@@ -1,0 +1,7 @@
+<div class="form-group">
+  <label>Kellerei</label>
+  <select class="form-control" (change)="onChange($event.target.value)">
+    <option value="-1">Kellerei wählen...</option>
+    <option *ngFor="let producer of producers" [value]="producer.id">{{producer.name}}</option>
+  </select>
+</div>

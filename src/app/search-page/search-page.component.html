@@ -1,0 +1,12 @@
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label>Name</label>
+      <input class="form-control" placeholder="Name..." [(value)]="searchName">
+    </div>
+    <winedb-producer-list (selectedProducer)="selectedProducerChanged($event)"></winedb-producer-list>
+  </form>
+</div>
+<div class="container">
+  <winedb-wine-list></winedb-wine-list>
+</div>

@@ -1,0 +1,31 @@
+<div class="container" *ngFor="let wine of wines">
+  <h3>{{wine.name}} <small class="text-muted">{{wine.producer?.name}}</small></h3>
+  <p style="white-space: pre-line;">{{wine.description}}</p>
+  <p>
+    <span *ngIf="wine.vintage"><em>Jahrgang:</em> {{wine.vintage}}, </span>
+    <span *ngIf="wine.goodFrom && wine.goodTo"><em>Trinkreif</em>: {{wine.goodFrom}}-{{wine.goodTo}}, </span>
+    <span *ngIf="wine.price"><em>Preis</em>: {{wine.price}} Fr.</span>
+  </p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Grösse</th>
+        <th>Status</th>
+        <th>Rein</th>
+        <th>Raus</th>
+        <th>Bewertung</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bottle of wine.bottles">
+        <td>{{bottle.code}}</td>
+        <td>{{bottle.size}}</td>
+        <td>{{bottle.stateId}}</td>
+        <td>{{bottle.checkin | date:'dd.MM.yy'}}</td>
+        <td>{{bottle.checkout | date:'dd.MM.yy'}}</td>
+        <td>{{bottle.emojiRating}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
