@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Wine } from './wine';
 import { Producer } from './producer';
 import { Bottle } from './bottle';
@@ -9,9 +9,8 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class WineStoreService {
-  private api = 'http://localhost:51490/api';
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    @Inject('API_ENDPOINT') private api: string) {
   }
   public getSingle(id: number): Observable<Wine> {
     return this.http.get(`${this.api}/wines/${id}`)

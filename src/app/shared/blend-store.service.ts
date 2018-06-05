@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Producer } from './producer';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,13 +6,12 @@ import { retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { Blend } from './blend';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class BlendStoreService {
-  private api = 'http://localhost:51490/api';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    @Inject('API_ENDPOINT') private api: string) {
   }
 
   public searchDropdown(name: string): Observable<Array<Producer>> {

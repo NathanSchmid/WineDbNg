@@ -1,5 +1,5 @@
 import { WineStoreService } from './../shared/wine-store.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Wine } from '../shared/wine';
 
@@ -10,10 +10,10 @@ import { Wine } from '../shared/wine';
 })
 export class WineDetailsPageComponent implements OnInit {
   wines: Wine[];
-  labelEndpoint = 'https://wl59www255.webland.ch/WineLabelHandler.ashx';
 
   constructor(private wineStore: WineStoreService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    @Inject('LABELS_ENDPOINT') private labelEndpoint: string
   ) {}
 
   ngOnInit() {

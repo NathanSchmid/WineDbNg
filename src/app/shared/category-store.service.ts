@@ -1,6 +1,6 @@
 import { Category } from './category';
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
@@ -9,9 +9,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CategoryStoreService {
-
-  private api = 'http://localhost:51490/api';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    @Inject('API_ENDPOINT') private api: string) {
   }
 
   public getAll(): Observable<Array<Category>> {

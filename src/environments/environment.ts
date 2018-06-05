@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiEndpoint: 'http://localhost:51490/api',
+  labelsEndpoint: 'https://wl59www255.webland.ch/WineLabelHandler.ashx'
 };
 
 /*

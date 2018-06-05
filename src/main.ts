@@ -8,5 +8,14 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+platformBrowserDynamic([
+  {
+    provide: 'API_ENDPOINT',
+    useValue: environment.apiEndpoint
+  },
+  {
+    provide: 'LABELS_ENDPOINT',
+    useValue: environment.labelsEndpoint
+  }
+]).bootstrapModule(AppModule)
   .catch(err => console.log(err));
