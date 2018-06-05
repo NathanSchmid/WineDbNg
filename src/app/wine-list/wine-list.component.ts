@@ -7,11 +7,17 @@ import { Wine } from '../shared/wine';
   templateUrl: './wine-list.component.html'
 })
 export class WineListComponent implements OnInit {
-  wines: Wine[];
+  wines: Wine[] = [];
 
   constructor(private wineStore: WineStoreService) { }
 
   ngOnInit() {
-    this.wineStore.getAll().subscribe(wines => this.wines = wines);
+    this.wineStore.search(null, null, null, [], true, false).subscribe(wines => this.wines = wines);
+  }
+
+  public search(name: string, producerId: number, blendId: number, categoryIds: number[], inStock: boolean, toDrink: boolean): void {
+    console.log(`Searching for name=${name}, prodcuerId=${producerId}, blendId=${blendId},` +
+        `categoryIds=${categoryIds}, inStock=${inStock}, toDrink=${toDrink}`);
+    this.wineStore.search(name, producerId, blendId, categoryIds, inStock, toDrink).subscribe(wines => this.wines = wines);
   }
 }

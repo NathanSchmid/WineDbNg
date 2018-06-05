@@ -4,20 +4,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { retry } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
+import { Blend } from './blend';
 
 
-@Injectable()
-export class ProducerStoreService {
+@Injectable({
+  providedIn: 'root'
+})
+export class BlendStoreService {
   private api = 'http://localhost:51490/api';
-
   constructor(private http: HttpClient) {
   }
 
   public searchDropdown(name: string): Observable<Array<Producer>> {
-    return this.http.get(`${this.api}/producers?$filter=indexof(toupper(Name),'${name.toUpperCase()}') gt -1&$top=10`)
+    return this.http.get(`${this.api}/blends?$filter=indexof(toupper(Name),'${name.toUpperCase()}') gt -1&$top=10`)
     .pipe(
       retry(3),
-      map(rawProducer => Producer.fromObjects(rawProducer))
+      map(rawBlend => Blend.fromObjects(rawBlend))
     );
   }
 }

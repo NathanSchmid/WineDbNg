@@ -1,18 +1,19 @@
-<div class="row" *ngFor="let wine of wines">
-  <div class="col-sm-6">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">{{wine.name}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{wine.producer?.name}}</h6>
-        <p class="card-text">
-          <span *ngIf="wine.vintage"><em>Jahrgang:</em> {{wine.vintage}}, </span>
-          <span *ngIf="wine.goodFrom && wine.goodTo"><em>Trinkreif</em>: {{wine.goodFrom}}-{{wine.goodTo}}, </span>
-          <span *ngIf="wine.price"><em>Preis</em>: {{wine.price}} Fr.</span>
-        </p>
-      </div>
-      <div class="card-footer">
-        <a [routerLink]="['/wines/', wine.id]" class="card-link">Details</a>
-      </div>
-    </div>
+<div class="card" style="margin-top: 0.5rem;" *ngFor="let wine of wines">
+  <div class="card-header" [winedbWineColorBackground]="wine.category?.color">
+    <h5 class="card-title">{{wine.name}} ({{wine.numberInStock}})</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{wine.producer?.name}}</h6>
+  </div>
+  <div *ngIf="wine.blend" class="card-body">
+    <p class="card-text">
+      {{wine.blend.name}}
+    </p>
+    <p class="card-text">
+      <span *ngIf="wine.vintage"><em>Jahrgang:</em> {{wine.vintage}}, </span>
+      <span *ngIf="wine.goodFrom && wine.goodTo"><em>Trinkreif</em>: {{wine.goodFrom}}-{{wine.goodTo}}, </span>
+      <span *ngIf="wine.price"><em>Preis</em>: {{wine.price}} Fr.</span>
+    </p>
+  </div>
+  <div class="card-footer">
+    <a [routerLink]="['/wines/', wine.id]" class="card-link">Details</a>
   </div>
 </div>

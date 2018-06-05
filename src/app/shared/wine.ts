@@ -1,12 +1,16 @@
+import { Category } from './category';
 import { Producer } from './producer';
 import { Bottle } from './bottle';
+import { Blend } from './blend';
 
 export class Wine {
   constructor(
     public id: number,
     public name: string,
     public blendId?: number,
+    public blend?: Blend,
     public categoryId?: number,
+    public category?: Category,
     public vintage?: number,
     public description?: string,
     public price?: number,
@@ -17,7 +21,9 @@ export class Wine {
     public goodTo?: number,
     public producerId?: number,
     public producer?: Producer,
-    public bottles?: Bottle[]
+    public bottles?: Bottle[],
+    public totalNumber?: number,
+    public numberInStock?: number
   ) {}
 
   public static fromObjects(rawWines: any): Wine[] {
@@ -35,7 +41,9 @@ export class Wine {
     return new Wine(rawWine.Id,
       rawWine.Name,
       rawWine.BlendId,
+      Blend.fromObject(rawWine.Blend),
       rawWine.CategoryId,
+      Category.fromObject(rawWine.Category),
       rawWine.Vintage,
       rawWine.Description,
       rawWine.Price,
@@ -46,7 +54,9 @@ export class Wine {
       rawWine.GoodTo,
       rawWine.ProducerId,
       Producer.fromObject(rawWine.Producer),
-      Bottle.fromObjects(rawWine.Bottles)
+      Bottle.fromObjects(rawWine.Bottles),
+      rawWine.TotalNumber,
+      rawWine.NumberInStock
     );
   }
 }

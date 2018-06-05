@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label>Wein</label>
+  <input class="form-control" data-toggle="dropdown" placeholder="Name..." [(value)]="searchTerm"
+   (change)="wineName.emit(searchTermInput.value)" #searchTermInput (keyup)="keyup.emit(searchTermInput.value)"  />
+  <div class="dropdown-menu">
+    <a class="dropdown-item" *ngFor="let wineName of wineNames" (click)="dropDownSelected(wineName)">{{wineName}}</a>
+  </div>
+</div>

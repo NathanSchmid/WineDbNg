@@ -1,0 +1,6 @@
+<div class="form-group">
+  <div class="form-check form-check-inline" *ngFor="let color of colors; let i = index">
+    <input class="form-check-input" type="checkbox" [id]="'searchColor_' + i" [value]="color" (change)="onColorSelected($event)">
+    <label class="form-check-label" [for]="'searchColor_' + i">{{color}}</label>
+  </div>
+</div>

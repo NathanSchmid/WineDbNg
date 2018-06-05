@@ -1,7 +1,7 @@
 <div class="form-group">
   <label>Kellerei</label>
-  <select class="form-control" (change)="onChange($event.target.value)">
-    <option value="-1">Kellerei wählen...</option>
-    <option *ngFor="let producer of producers" [value]="producer.id">{{producer.name}}</option>
-  </select>
+  <input class="form-control" data-toggle="dropdown" placeholder="Kellerei..." [(value)]="searchTerm" #searchTermInput (keyup)="keyup.emit(searchTermInput.value)" />
+  <div class="dropdown-menu">
+      <a class="dropdown-item" href="#" *ngFor="let producer of producers" (click)="dropDownSelected(producer.id)">{{producer.name}}</a>
+  </div>
 </div>

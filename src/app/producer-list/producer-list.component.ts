@@ -1,6 +1,10 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Producer } from '../shared/producer';
 import { ProducerStoreService } from '../shared/producer-store.service';
+import { debounceTime } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'winedb-producer-list',
@@ -8,18 +12,25 @@ import { ProducerStoreService } from '../shared/producer-store.service';
   styles: []
 })
 export class ProducerListComponent implements OnInit {
+  searchTerm = '';
   producers: Producer[];
+  keyup = new EventEmitter<string>();
   @Output() selectedProducer: EventEmitter<Producer> = new EventEmitter<Producer>();
 
   constructor(private producerStore: ProducerStoreService) {}
 
   ngOnInit() {
-    this.producerStore.getAll().subscribe(producers => this.producers = producers);
+    this.keyup.pipe(
+      filter(term => term.length >= 1),
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(term => this.producerStore.searchDropdown(term))
+    ).subscribe(producers => this.producers = producers);
   }
 
-  onChange(id: string) {
-    const numericId = parseInt(id, 10);
-    const producer = this.producers.find(f => f.id === numericId);
+  dropDownSelected(id: number) {
+    const producer = this.producers.find(f => f.id === id);
+    this.searchTerm = producer.name;
     this.selectedProducer.emit(producer);
   }
 }

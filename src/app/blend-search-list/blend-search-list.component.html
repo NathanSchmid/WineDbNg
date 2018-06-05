@@ -1,0 +1,7 @@
+<div class="form-group">
+  <label>Assemblage</label>
+  <input class="form-control" data-toggle="dropdown" placeholder="Assemblage..." [(value)]="searchTerm" #searchTermInput (keyup)="keyup.emit(searchTermInput.value)" />
+  <div class="dropdown-menu">
+    <a class="dropdown-item" href="#" *ngFor="let blend of blends" (click)="dropDownSelected(blend.id)">{{blend.name}}</a>
+  </div>
+</div>

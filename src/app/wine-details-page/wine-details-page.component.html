@@ -1,11 +1,28 @@
 <div class="container" *ngFor="let wine of wines">
   <h3>{{wine.name}} <small class="text-muted">{{wine.producer?.name}}</small></h3>
-  <p style="white-space: pre-line;">{{wine.description}}</p>
-  <p>
-    <span *ngIf="wine.vintage"><em>Jahrgang:</em> {{wine.vintage}}, </span>
-    <span *ngIf="wine.goodFrom && wine.goodTo"><em>Trinkreif</em>: {{wine.goodFrom}}-{{wine.goodTo}}, </span>
-    <span *ngIf="wine.price"><em>Preis</em>: {{wine.price}} Fr.</span>
-  </p>
+  <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Beschreibung</a>
+      </li>
+      <li class="nav-item" *ngIf="wine.labelFileName">
+        <a class="nav-link" id="image-tab" data-toggle="tab" href="#image" role="tab" aria-controls="image" aria-selected="false">Bild</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
+        <p style="white-space: pre-line;">{{wine.description}}</p>
+        <p *ngIf="wine.blend">{{wine.blend.name}}</p>
+        <p *ngIf="wine.category">{{wine.category.color}}, {{wine.category.name}}</p>
+        <p>
+          <span *ngIf="wine.vintage"><em>Jahrgang:</em> {{wine.vintage}}, </span>
+          <span *ngIf="wine.goodFrom && wine.goodTo"><em>Trinkreif</em>: {{wine.goodFrom}}-{{wine.goodTo}}, </span>
+          <span *ngIf="wine.price"><em>Preis</em>: {{wine.price}} Fr.</span>
+        </p>
+    </div>
+    <div class="tab-pane fade" id="image" role="tabpanel" aria-labelledby="image-tab" *ngIf="wine.labelFileName">
+      <img [src]="labelEndpoint + '?label=' + wine.labelFileName" />
+    </div>
+   </div>
   <table class="table">
     <thead>
       <tr>
@@ -21,10 +38,10 @@
       <tr *ngFor="let bottle of wine.bottles">
         <td>{{bottle.code}}</td>
         <td>{{bottle.size}}</td>
-        <td>{{bottle.stateId}}</td>
+        <td>{{bottle.state}}</td>
         <td>{{bottle.checkin | date:'dd.MM.yy'}}</td>
         <td>{{bottle.checkout | date:'dd.MM.yy'}}</td>
-        <td>{{bottle.emojiRating}}</td>
+        <td>{{bottle.rating | emojirating}}</td>
       </tr>
     </tbody>
   </table>

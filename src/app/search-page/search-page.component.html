@@ -1,12 +1,22 @@
 <div class="container">
   <form>
-    <div class="form-group">
-      <label>Name</label>
-      <input class="form-control" placeholder="Name..." [(value)]="searchName">
-    </div>
+    <winedb-wine-search-list (wineName)="wineNameChanged($event)"></winedb-wine-search-list>
     <winedb-producer-list (selectedProducer)="selectedProducerChanged($event)"></winedb-producer-list>
+    <winedb-blend-search-list (selectedBlend)="selectedBlendChanged($event)"></winedb-blend-search-list>
+    <winedb-wine-color-search (selectedCategories)="selectedCategoriesChanged($event)"></winedb-wine-color-search>
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="inStock" (change)="inStockChanged($event.target.checked)" checked>
+        <label class="form-check-label" for="inStock">an Lager</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="toDrink" (change)="toDrinkChanged($event.target.checked)">
+        <label class="form-check-label" for="toDrink">austrinken</label>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" (click)="startSearch(wineList)">Suchen</button>
   </form>
 </div>
 <div class="container">
-  <winedb-wine-list></winedb-wine-list>
+  <winedb-wine-list #wineList></winedb-wine-list>
 </div>

@@ -10,9 +10,11 @@ import { Wine } from '../shared/wine';
 })
 export class WineDetailsPageComponent implements OnInit {
   wines: Wine[];
+  labelEndpoint = 'https://wl59www255.webland.ch/WineLabelHandler.ashx';
 
   constructor(private wineStore: WineStoreService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     const params = this.route.snapshot.params;
