@@ -10,6 +10,7 @@ import { Wine } from '../shared/wine';
 })
 export class WineDetailsPageComponent implements OnInit {
   wines: Wine[];
+  code = '';
 
   constructor(private wineStore: WineStoreService,
     private route: ActivatedRoute,
@@ -18,8 +19,12 @@ export class WineDetailsPageComponent implements OnInit {
 
   ngOnInit() {
     const params = this.route.snapshot.params;
-    const id = parseInt(params['id'], 10);
-    this.wineStore.getSingle(id)
-      .subscribe(wine => this.wines = [wine]);
+    if (params['id']) {
+      const id = parseInt(params['id'], 10);
+      this.wineStore.getSingle(id).subscribe(wine => this.wines = [wine]);
+    } else if (params['code']) {
+      this.code = params['code'];
+      this.wineStore.getByCode(this.code).subscribe(wine => this.wines = [wine]);
+    }
   }
 }

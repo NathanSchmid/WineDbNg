@@ -1,22 +1,42 @@
 <div class="container">
-  <form>
-    <winedb-wine-search-list (wineName)="wineNameChanged($event)"></winedb-wine-search-list>
-    <winedb-producer-list (selectedProducer)="selectedProducerChanged($event)"></winedb-producer-list>
-    <winedb-blend-search-list (selectedBlend)="selectedBlendChanged($event)"></winedb-blend-search-list>
-    <winedb-wine-color-search (selectedCategories)="selectedCategoriesChanged($event)"></winedb-wine-color-search>
-    <div class="form-group">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="inStock" (change)="inStockChanged($event.target.checked)" checked>
-        <label class="form-check-label" for="inStock">an Lager</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="checkbox" id="toDrink" (change)="toDrinkChanged($event.target.checked)">
-        <label class="form-check-label" for="toDrink">austrinken</label>
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="search-tab" data-toggle="tab" href="#search" role="tab" aria-controls="search" aria-selected="true">Suche</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="action-tab" data-toggle="tab" href="#action" role="tab" aria-controls="action" aria-selected="false">Aktionen</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="search" role="tabpanel" aria-labelledby="search-tab">
+      <form style="margin-top: 1em;">
+        <winedb-wine-search-list (wineName)="wineNameChanged($event)"></winedb-wine-search-list>
+        <winedb-producer-list (selectedProducer)="selectedProducerChanged($event)"></winedb-producer-list>
+        <winedb-blend-search-list (selectedBlend)="selectedBlendChanged($event)"></winedb-blend-search-list>
+        <winedb-wine-color-search (selectedCategories)="selectedCategoriesChanged($event)"></winedb-wine-color-search>
+        <div class="form-group">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inStock" (change)="inStockChanged($event.target.checked)" checked>
+            <label class="form-check-label" for="inStock">an Lager</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="toDrink" (change)="toDrinkChanged($event.target.checked)">
+            <label class="form-check-label" for="toDrink">austrinken</label>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary" (click)="startSearch(wineList)">Suchen</button>
+      </form>
+      <div class="container">
+        <winedb-wine-list #wineList></winedb-wine-list>
       </div>
     </div>
-    <button type="button" class="btn btn-primary" (click)="startSearch(wineList)">Suchen</button>
-  </form>
-</div>
-<div class="container">
-  <winedb-wine-list #wineList></winedb-wine-list>
+    <div class="tab-pane fade" id="action" role="tabpanel" aria-labelledby="action-tab">
+      <form style="margin-top: 1em;" (submit)="goToCode()">
+        <div class="form-group">
+          <input type="text" class="form-control" id="inputCode" placeholder="Code" (change)="codeChanged($event.target.value)">
+        </div>
+        <button type="code" class="btn btn-primary">Los</button>
+      </form>
+    </div>
+  </div>
 </div>

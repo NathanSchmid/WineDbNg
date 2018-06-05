@@ -3,21 +3,22 @@ import { WineListComponent } from './../wine-list/wine-list.component';
 import { Component, OnInit } from '@angular/core';
 import { Producer } from '../shared/producer';
 import { Blend } from '../shared/blend';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'winedb-search-page',
   templateUrl: './search-page.component.html'
 })
 export class SearchPageComponent {
-  searchName?: string;
+  searchName = '';
   searchProducerId?: number;
   searchBlendId?: number;
   searchCategoryIds: number[] = [];
   searchInStock = true;
   searchToDrink = false;
+  code = '';
 
-  constructor() {
-    this.searchName = '';
+  constructor(private router: Router) {
   }
 
   wineNameChanged(wineName: string) {
@@ -52,7 +53,16 @@ export class SearchPageComponent {
     this.searchToDrink = checked;
   }
 
+  codeChanged(code: string) {
+    this.code = code.toUpperCase();
+  }
+
   startSearch(wineList: WineListComponent) {
     wineList.search(this.searchName, this.searchProducerId, this.searchBlendId, this.searchCategoryIds, this.searchInStock, this.searchToDrink);
+  }
+
+  goToCode() {
+    this.router.navigate(['/wines/bottle', this.code]);
+    return false;
   }
 }

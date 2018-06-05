@@ -20,6 +20,10 @@ const routes: Routes = [
     path: 'wines/:id',
     component: WineDetailsPageComponent,
   },
+  {
+    path: 'wines/bottle/:code',
+    component: WineDetailsPageComponent,
+  },
 ];
 
 @NgModule({

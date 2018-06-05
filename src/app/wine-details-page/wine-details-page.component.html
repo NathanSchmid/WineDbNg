@@ -23,7 +23,7 @@
       <img [src]="labelEndpoint + '?label=' + wine.labelFileName" />
     </div>
    </div>
-  <table class="table">
+  <table class="table table-sm">
     <thead>
       <tr>
         <th>Code</th>
@@ -35,7 +35,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let bottle of wine.bottles">
+      <tr *ngFor="let bottle of wine.bottles" [ngClass]="{'table-warning': code === bottle.code}">
         <td>{{bottle.code}}</td>
         <td>{{bottle.size}}</td>
         <td>{{bottle.state}}</td>

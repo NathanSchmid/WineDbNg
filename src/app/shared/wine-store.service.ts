@@ -20,6 +20,14 @@ export class WineStoreService {
     );
   }
 
+  public getByCode(code: string): Observable<Wine> {
+    return this.http.get(`${this.api}/wines/bottle/${code}`)
+    .pipe(
+      retry(3),
+      map(rawWine => Wine.fromObject(rawWine))
+    );
+  }
+
   public searchDropdown(name: string): Observable<Array<Wine>> {
     return this.http.get(`${this.api}/wines?$filter=indexof(toupper(Name),'${name.toUpperCase()}') gt -1&$top=10`)
       .pipe(
