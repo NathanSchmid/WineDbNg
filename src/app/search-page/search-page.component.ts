@@ -58,7 +58,8 @@ export class SearchPageComponent {
   }
 
   startSearch(wineList: WineListComponent) {
-    wineList.search(this.searchName, this.searchProducerId, this.searchBlendId, this.searchCategoryIds, this.searchInStock, this.searchToDrink);
+    wineList.search(this.searchName, this.searchProducerId, this.searchBlendId, this.searchCategoryIds,
+       this.searchInStock, this.searchToDrink);
   }
 
   goToCode() {

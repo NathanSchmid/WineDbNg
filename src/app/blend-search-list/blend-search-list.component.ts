@@ -16,6 +16,7 @@ export class BlendSearchListComponent implements OnInit {
   blends: Blend[];
   keyup = new EventEmitter<string>();
   @Output() selectedBlend: EventEmitter<Blend> = new EventEmitter<Blend>();
+  private lastSelection: Blend;
 
   constructor(private blendStore: BlendStoreService) {}
 
@@ -25,12 +26,21 @@ export class BlendSearchListComponent implements OnInit {
       debounceTime(500),
       distinctUntilChanged(),
       switchMap(term => this.blendStore.searchDropdown(term))
-    ).subscribe(blends => this.blends = blends);
+    ).subscribe(blends => {
+      this.selectedBlend.emit(null);
+      this.blends = blends;
+    });
   }
 
-  dropDownSelected(id: number) {
-    const blend = this.blends.find(f => f.id === id);
+  dropDownSelected(blend: Blend) {
     this.searchTerm = blend.name;
     this.selectedBlend.emit(blend);
+    this.lastSelection = blend;
+  }
+
+  onBlur() {
+    if (!this.lastSelection || this.lastSelection.name !== this.searchTerm) {
+      this.searchTerm = null;
+    }
   }
 }
