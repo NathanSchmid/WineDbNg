@@ -38,10 +38,13 @@
       <tr *ngFor="let bottle of wine.bottles" [ngClass]="{'table-warning': code === bottle.code}">
         <td>{{bottle.code}}</td>
         <td>{{bottle.size}}</td>
-        <td>{{bottle.state}}</td>
+        <td>{{bottle.state.name}}</td>
         <td>{{bottle.checkin | date:'dd.MM.yy'}}</td>
         <td>{{bottle.checkout | date:'dd.MM.yy'}}</td>
-        <td>{{bottle.rating | emojirating}}</td>
+        <td *ngIf="AVAILABLE_STATES.includes(bottle.state.id); else rating"><a [routerLink]="['/checkout', bottle.code]">Checkout</a></td>
+        <ng-template #rating>
+          <td>{{bottle.rating | emojirating}}</td>
+        </ng-template>
       </tr>
     </tbody>
   </table>

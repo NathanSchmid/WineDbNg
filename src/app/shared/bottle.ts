@@ -1,9 +1,10 @@
+import { State } from './state';
+
 export class Bottle {
     constructor(
       public code: string,
       public size?: number,
-      public stateId?: number,
-      public state?: string,
+      public state?: State,
       public checkin?: Date,
       public checkout?: Date,
       public rating?: number
@@ -26,8 +27,7 @@ export class Bottle {
       }
       return new Bottle(rawBottle.Code,
         rawBottle.Size,
-        rawBottle.StateId,
-        rawBottle.State ? rawBottle.State.Name : null,
+        State.fromObject(rawBottle.State),
         rawBottle.Checkin,
         rawBottle.Checkout,
         rawBottle.Rating

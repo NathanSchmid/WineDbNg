@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ProducerStoreService } from './shared/producer-store.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ProducerListComponent } from './producer-list/producer-list.component';
@@ -17,6 +18,8 @@ import { WineSearchListComponent } from './wine-search-list/wine-search-list.com
 import { WineColorBackgroundDirective } from './directives/wine-color-background.directive';
 import { BlendSearchListComponent } from './blend-search-list/blend-search-list.component';
 import { WineColorSearchComponent } from './wine-color-search/wine-color-search.component';
+import { CheckoutPageComponent } from './checkout-page/checkout-page.component';
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
 
 @NgModule({
   declarations: [
@@ -29,12 +32,15 @@ import { WineColorSearchComponent } from './wine-color-search/wine-color-search.
     EmojiRatingPipe,
     WineColorBackgroundDirective,
     BlendSearchListComponent,
-    WineColorSearchComponent
+    WineColorSearchComponent,
+    CheckoutPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    DateValueAccessorModule
   ],
   providers: [ProducerStoreService, WineStoreService, BlendStoreService, CategoryStoreService],
   bootstrap: [AppComponent]

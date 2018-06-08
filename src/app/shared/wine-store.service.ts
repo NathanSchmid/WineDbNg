@@ -89,4 +89,16 @@ export class WineStoreService {
         map(rawWine => Wine.fromObjects(rawWine))
       );
   }
+
+  public checkout(code: string, rating: number, stateId: number, checkout: Date): Observable<any> {
+    return this.http.post(`${this.api}/wines/bottle/${code}`, {
+      Code: code,
+      Rating: rating,
+      StateId: stateId,
+      Checkout: checkout
+    })
+    .pipe(
+      retry(3)
+    );
+  }
 }

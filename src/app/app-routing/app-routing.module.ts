@@ -1,3 +1,4 @@
+import { CheckoutPageComponent } from './../checkout-page/checkout-page.component';
 import { SearchPageComponent } from './../search-page/search-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'wines/:id',
     component: WineDetailsPageComponent,
+  },
+  {
+    path: 'checkout/:code',
+    component: CheckoutPageComponent,
   },
   {
     path: 'wines/bottle/:code',

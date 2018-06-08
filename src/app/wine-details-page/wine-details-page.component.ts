@@ -6,9 +6,10 @@ import { Wine } from '../shared/wine';
 @Component({
   selector: 'winedb-wine-details-page',
   templateUrl: './wine-details-page.component.html',
-  styles: []
+  styles: [ './wine-details-page.component.css']
 })
 export class WineDetailsPageComponent implements OnInit {
+  AVAILABLE_STATES = [2];
   wines: Wine[];
   code = '';
 
