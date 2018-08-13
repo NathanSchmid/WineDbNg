@@ -3,7 +3,7 @@
   <form #checkoutForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="rating">Bewertung</label>
-      <select id="rating" [(ngModel)]="model.rating" class="form-control" name="rating">
+      <select id="rating" [(ngModel)]="model.rating" class="form-control" name="rating" #item (change)="onRate(item.value)">
         <option *ngFor="let r of ratings" [value]="r">{{r}} = {{r | emojirating}}
         </option>
       </select>
